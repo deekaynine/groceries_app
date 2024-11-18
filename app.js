@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 
+
 const appRouter = require("./routes/appRouter")
 const productsRouter = require("./routes/productsRouter")
 const categoriesRouter = require("./routes/categoriesRouter")

@@ -8,13 +8,13 @@ const getCategoriesList = async (req, res) => {
 const getCategoryProducts = async (req, res) => {
     const {categoryName} = req.params
     const data = await db.queryCategoryProducts(categoryName)
-    res.send(data)
+    res.render('categoryProducts', {title: categoryName, products: data })
 }
 
 const getCategoryProduct = async(req, res) => {
     const {categoryName, productId} = req.params
     const data = await db.queryCategoryProduct(categoryName, productId)
-    res.send(data)
+    res.render("categoryProduct", {title: data[0].name, product: data[0] })
 }
 
 

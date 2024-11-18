@@ -19,15 +19,17 @@ async function queryCategories(){
 async function queryCategoryProducts(name){
     const {rows} = await pool.query(`SELECT * FROM category INNER JOIN product 
         ON category.id = product.category_id
-        WHERE category.name ='${name}' `)
+        WHERE LOWER(category.name) LIKE LOWER('${name}') `)
     return rows
 }
 
 async function queryCategoryProduct(categoryName, productId){
-    const {rows} = await pool.query(`SELECT * FROM category INNER JOIN product 
+    const {rows} = await pool.query(`SELECT DISTINCT * FROM category INNER JOIN product 
         ON category.id = product.category_id
-        WHERE category.name ='${categoryName}' AND product.id = ('${productId}') `)
+        WHERE LOWER(category.name) = LOWER('${categoryName}') AND product.id = ('${productId}') `)
     return rows
 }
+
+
 
 module.exports = { getAllProducts, getSingleProduct, queryCategories,queryCategoryProduct,queryCategoryProducts }
