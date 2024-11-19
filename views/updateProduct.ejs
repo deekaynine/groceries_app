@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+<body>
+  <h1><%= title %></h1>
+  <form action="/products/<%= product.id %>/update" method="POST">
+    <label for="name">Product Name: </label>
+    <input type="text" name="name" id="name" required>
+    <label for="price">Price: </label>
+    <input type="number" name="price" id="price" min="0" max="99" step=".01" required>
+    <label for="stock">Stock: </label>
+    <input type="number"  name="stock" id="stock" min="0" max="99" required>
+    <label for="category_id">Category: </label>
+    <input type="number" name="category_id" id="category_id">
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/">Back to home</a>
+</body>
+</html>

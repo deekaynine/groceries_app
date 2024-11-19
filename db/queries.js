@@ -6,7 +6,7 @@ async function getAllProducts(){
 }
 
 async function getSingleProduct(productId){
-    const data = await pool.query(`SELECT * FROM product WHERE id = ${productId}`)
+    const data = await pool.query(`SELECT * FROM product WHERE id = ${productId};`)
     return data
 }
 
@@ -30,6 +30,32 @@ async function queryCategoryProduct(categoryName, productId){
     return rows
 }
 
+async function addProduct(name, price, stock, category_id){
+    await pool.query(`INSERT INTO product (name, price, stock, category_id) 
+                        VALUES ($1, $2, $3, $4)`
+                        , [name, price, stock, category_id])
+    console.log("update")
+}
+
+async function deleteProduct(productId){
+    await pool.query(`DELETE FROM product WHERE product.id = ${productId};`)
+    console.log("update")
+    }
+
+async function updateProduct( name, price, stock, category_id, productId){
+    await pool.query(`
+        UPDATE product
+        SET
+        name = '${name}',
+        price = ${price},
+        stock = ${stock},
+        category_id =${category_id}
+        WHERE product.id = ${productId};`)
+    console.log("update")
+}
 
 
-module.exports = { getAllProducts, getSingleProduct, queryCategories,queryCategoryProduct,queryCategoryProducts }
+module.exports = { getAllProducts, queryCategories, 
+    queryCategoryProduct,queryCategoryProducts,
+    addProduct, deleteProduct, updateProduct, getSingleProduct
+}
