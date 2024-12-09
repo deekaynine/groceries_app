@@ -9,17 +9,25 @@
     <input type="text" name="searchUser" id="searchUser">
     <button type="submit">Search</button>
   </form> */} -->
+  <% if (locals.user) {%>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/users/log-out">LOG OUT</a>
+  <%} 
+  else
+   {%> 
+  <a href="/users/log-in">LOG IN</a>
   <h3>Create a Product: </h3>
   <a href="/products/create">Create</a>
+
   <ul>
     <% if (locals.categories) {%>
-    <%categories.forEach(category => {%>
+    <% categories.forEach(category => {%>
     <a href="/categories/<%= category.name %>"><%= category.name %></a>
     <%}); %>
-    <% } %>
+    <%} %>
 
     <% if (locals.products) {%>
-      <% products.forEach(product => { %>
+      <% products.forEach(product => {%>
         <li>
           ID: <%= product.id %>, Name: <%= product.name %> price: <%= product.price %> Stock: <%= product.stock %>
           <a href="/products/<%= product.id %>/update">Update</a>
@@ -28,8 +36,10 @@
         // <form action="/products/<%= product.id %>/delete" method="POST" style="display:inline;">
         //   <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
         // </form>
-      <% }); %>
-    <% } %>
+      <%})%>
+    <%} %>
   </ul>
+  <%} %>
+  
 </body>
 </html>
